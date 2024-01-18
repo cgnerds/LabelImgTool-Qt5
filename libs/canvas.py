@@ -479,7 +479,7 @@ class Canvas(QWidget):
             brush = QBrush(Qt.BDiagPattern)
             p.setBrush(brush)
             if self.shape_type == self.RECT_SHAPE:
-                p.drawRect(leftTop.x(), leftTop.y(), rectWidth, rectHeight)
+                p.drawRect(int(leftTop.x()), int(leftTop.y()), int(rectWidth), int(rectHeight))
 
         p.end()
 
