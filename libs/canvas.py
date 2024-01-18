@@ -1,7 +1,11 @@
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-#from PyQt5.QtOpenGL import *
+try:
+    from PyQt5.QtGui import *
+    from PyQt5.QtCore import *
+    from PyQt5.QtWidgets import *
+except:
+    from PyQt4.QtGui import *
+    from PyQt4.QtCore import *
+    #from PyQt4.QtOpenGL import *
 
 from .shape import Shape
 from .lib import distance
@@ -75,7 +79,7 @@ class Canvas(QWidget):
             self.line.set_shape_type(type)
             return True
         else:
-            print ("not support the shape type: " + str(type))
+            print("not support the shape type: " + str(type))
             return False
 
     def enterEvent(self, ev):
@@ -434,7 +438,7 @@ class Canvas(QWidget):
         #print self.brush_point.x(),self.brush_point.y()
         if self.task_mode == 3:
             p.setOpacity(0.3)
-            p.drawImage(0,0,self.mask_pixmap)
+            #p.drawImage(0,0,self.mask_pixmap)
             if self.brush_point:
                 p.drawEllipse(self.brush_point,self.brush_size/2,self.brush_size/2)
             if self.current_brush_path:
@@ -475,7 +479,7 @@ class Canvas(QWidget):
             brush = QBrush(Qt.BDiagPattern)
             p.setBrush(brush)
             if self.shape_type == self.RECT_SHAPE:
-                p.drawRect(int(leftTop.x()), int(leftTop.y()), int(rectWidth), int(rectHeight))
+                p.drawRect(leftTop.x(), leftTop.y(), rectWidth, rectHeight)
 
         p.end()
 
@@ -573,22 +577,30 @@ class Canvas(QWidget):
         return super(Canvas, self).minimumSizeHint()
 
     def wheelEvent(self, ev):
-        if ev.orientation() == Qt.Vertical:
-            mods = ev.modifiers()
-            if Qt.ControlModifier == int(mods):
-                self.zoomRequest.emit(ev.delta())
+        qt_version = 4 if hasattr(ev, "delta") else 5
+        if qt_version == 4:
+            if ev.orientation() == Qt.Vertical:
+                v_delta = ev.delta()
+                h_delta = 0
             else:
-                self.scrollRequest.emit(
-                    ev.delta(), Qt.Horizontal if (
-                        Qt.ShiftModifier == int(mods)) else Qt.Vertical)
+                h_delta = ev.delta()
+                v_delta = 0
         else:
-            self.scrollRequest.emit(ev.delta(), Qt.Horizontal)
+            delta = ev.angleDelta()
+            h_delta = delta.x()
+            v_delta = delta.y()
+
+        mods = ev.modifiers()
+        if Qt.ControlModifier == int(mods) and v_delta:
+            self.zoomRequest.emit(v_delta)
+        else:
+            v_delta and self.scrollRequest.emit(v_delta, Qt.Vertical)
+            h_delta and self.scrollRequest.emit(h_delta, Qt.Horizontal)
         ev.accept()
 
     def keyPressEvent(self, ev):
         key = ev.key()
         if key == Qt.Key_Escape and self.current:
-            print ('ESC press')
             self.current = None
             self.drawingPolygon.emit(False)
             self.update()
@@ -630,7 +642,6 @@ class Canvas(QWidget):
     def loadShapes(self, shapes):
         self.shapes = list(shapes)
         self.shape_type = shapes[0].get_shape_type()
-        print (self.shape_type)
         self.current = None
         self.repaint()
 

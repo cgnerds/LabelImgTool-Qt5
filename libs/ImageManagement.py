@@ -14,7 +14,7 @@ class loadImageThread(threading.Thread):
 
     def run(self):
         for image_url in self.image_list:
-            print (self.website + image_url)
+            print(self.website + image_url)
             urllib.urlretrieve(
                 self.website + image_url,
                 self.filepath + image_url)

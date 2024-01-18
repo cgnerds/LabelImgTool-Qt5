@@ -1,6 +1,10 @@
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
+try:
+    from PyQt5.QtGui import *
+    from PyQt5.QtCore import *
+    from PyQt5.QtWidgets import *
+except:
+    from PyQt4.QtGui import *
+    from PyQt4.QtCore import *
 
 from .lib import newIcon, labelValidator
 
@@ -27,9 +31,9 @@ class SubListWidget(QDialog):
         return self.select_text if self.exec_() else None
 
     def listItemDoubleClicked(self, tQListWidgetItem):
-        text = tQListWidgetItem.text()
+        text = tQListWidgetItem.text().trimmed()
         self.select_text = text
-        print (text)
+        print(text)
         if text is not None:
             self.accept()
 
@@ -70,7 +74,7 @@ class LabelDialog(QDialog):
         elif listItem:
             sorted_labels = []
             if self.label_fre_dic:
-                print (label_fre_dic)
+                print(label_fre_dic)
                 sorted_labels = sorted(
                     self.label_fre_dic,
                     key=self.label_fre_dic.get,
@@ -85,10 +89,11 @@ class LabelDialog(QDialog):
         self.setLayout(layout)
 
     def validate(self):
-        if self.edit.text():
+        if self.edit.text().strip():
             self.accept()
 
     def postProcess(self):
+        #self.edit.setText(self.edit.text().trimmed())
         self.edit.setText(self.edit.text())
 
     def popUp(self, text='', move=True):
@@ -100,17 +105,17 @@ class LabelDialog(QDialog):
         return self.edit.text() if self.exec_() else None
 
     def sublistwidgetclicked(self, tQListWidgetItem):
-        print (tQListWidgetItem.text())
-        print ('doubleclicked')
+        print(tQListWidgetItem.text().trimmed())
+        print('doubleclicked')
 
     def listItemDoubleClicked(self, tQListWidgetItem):
-        text = tQListWidgetItem.text()
+        text = tQListWidgetItem.text().strip()
         self.edit.setText(text)
         self.validate()
 
     def listItemClicked(self, tQListWidgetItem):
         self.sublistwidget.close()
-        labels = self.sub_labels_dic[str(tQListWidgetItem.text())]
+        labels = self.sub_labels_dic[str(tQListWidgetItem.text().trimmed())]
         label_dic = {}
         for label in labels:
             if label in self.label_fre_dic:

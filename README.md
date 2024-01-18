@@ -24,9 +24,6 @@ CLS mode
 
 ![](screenshot/cls_task.jpg)
 
-Brush SEG mode(in development: brush branch)
-
-![](screenshot/brush_task.jpg)
 
 ## Build source and use it
 
@@ -37,23 +34,10 @@ Requires at least [Python 3.10](http://www.python.org/getit/) and has been teste
 conda create -n labelimgtool python=3.10 -y
 conda activate labelimgtool
 pip install -r requirements.txt
+python labelImg.py
+# (NOT NEED)
+pyrcc5 -o resources.py resources.qrc
 ```
-
-`pip install lxml`
-
-`pip install qdarkstyle`
-
-`./labelImg.py`
-
-* Windows
-
-Need to download and setup [Python 2.6](https://www.python.org/downloads/windows/) or later and [PyQt5](https://www.riverbankcomputing.com/software/pyqt/download),lxml,qdarkstyle.
-Open cmd and go to $labelImg, 
-
-`$ pyrcc4 -o resources.py resources.qrc`
-
-`$ python labelImg.py`
-
 ## Default file framework
 
 |---Images
@@ -71,10 +55,7 @@ Open cmd and go to $labelImg,
 the file containing annotations will be created by default.
 
 ## Usage
-After cloning the code, you should run `$ make all` to generate the resource file.
-
-You can then start annotating by running `$ ./labelImg.py`. For usage
-instructions you can see [Here](https://youtu.be/p0nR2YsCY_U)
+For usage instructions you can see [Here](https://youtu.be/p0nR2YsCY_U)
 
 At the moment annotations are saved as an XML file. The format is PASCAL VOC format, and the format is the same as [ImageNet](http://www.image-net.org/)
 
@@ -93,8 +74,6 @@ You also can create labels with two levels in [data/predefined_sub_classes.txt](
 And the labels will be ranked by the frequency you use it.
 
 ### General steps from scratch
-
-* Build and launch: `$ make all; python labelImg.py`
 
 * Click 'Change default saved annotation folder' in Menu/File
 
