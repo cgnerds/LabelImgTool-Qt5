@@ -1,2 +1,0 @@
-lxml
-pyqt5-tools

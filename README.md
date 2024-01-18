@@ -28,23 +28,16 @@ Brush SEG mode(in development: brush branch)
 
 ![](screenshot/brush_task.jpg)
 
-## Release software for windows
-[baiduyun](https://pan.baidu.com/s/1iREYsJiQCzPPZGf6dFvauw)
-[googledriver](https://drive.google.com/open?id=118bUKQGlfwLgRTpptNzgBijJneInvw7T)
-
 ## Build source and use it
 
-Requires at least [Python 2.6](http://www.python.org/getit/) and has been tested with [PyQt5.8](http://www.riverbankcomputing.co.uk/software/pyqt/intro).
-
-In order to build the resource and assets, you need to install PyQt5-dev-tools:
+Requires at least [Python 3.10](http://www.python.org/getit/) and has been tested with [PyQt5.15](http://www.riverbankcomputing.co.uk/software/pyqt/intro).
 
 * Ubuntu
-
-`sudo apt-get install PyQt5-dev-tools`
-* Mac
-   install PyQt5 with [instructions](https://robonobodojo.wordpress.com/2017/02/08/installing-PyQt5-on-mac-osx/)
-
-`sudo apt-get install python-opencv`
+``` bash
+conda create -n labelimgtool python=3.10 -y
+conda activate labelimgtool
+pip install -r requirements.txt
+```
 
 `pip install lxml`
 

@@ -1150,7 +1150,7 @@ class MainWindow(QMainWindow, WindowMixin):
         if self.task_mode in [0,1]:
             if item and self.canvas.editing():
                 self._noSelectionSlot = True
-                self.canvas.selectShape(self.itemsToShapes[item])
+                self.canvas.selectShape(self.itemsToShapes[int(item.text())])
         elif self.task_mode == 2:
             if item:
                 self.selectedLabel = self.itemsToShapes[item]
