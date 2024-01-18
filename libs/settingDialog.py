@@ -1,9 +1,9 @@
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 import socket
 import re
 
 
-class SettingDialog(QtGui.QDialog):
+class SettingDialog(QtWidgets.QDialog):
     enable_color_map = True
     label_font_size = 10
     task_mode = 0 #0=det, 1=seg, 2=cls

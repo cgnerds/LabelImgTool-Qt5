@@ -101,7 +101,7 @@ class PascalVocWriter:
             object_item = SubElement(top, 'object')
             if each_object['name']:
                 name = SubElement(object_item, 'name')
-                name.text = unicode(each_object['name'])
+                name.text = str(each_object['name'])
             pose = SubElement(object_item, 'pose')
             pose.text = "Unspecified"
             if 'instance_id' in each_object.keys():
@@ -123,11 +123,11 @@ class PascalVocWriter:
                 ymax.text = str(each_object['ymax'])
             elif self.shape_type == 'POLYGON':
                 polygon = SubElement(object_item, 'polygon')
-                for i in xrange(int(each_object['point_num'])):
+                for i in range(int(each_object['point_num'])):
                     point = SubElement(polygon, 'point' + str(i))
                     point.text = str(
                         int(each_object[i][0])) + ',' + str(int(each_object[i][1]))
-                    print i, point.text
+                    print (i, point.text)
 
     def save(self, targetFile=None):
         root = self.genXML()
@@ -136,7 +136,7 @@ class PascalVocWriter:
         if targetFile is None:
             out_file = open(self.filename + '.xml', 'w')
         else:
-            out_file = open(targetFile, 'w')
+            out_file = open(targetFile, 'wb')
         out_file.write(self.prettify(root))
         # out_file.write(root)
         out_file.close()
@@ -206,7 +206,7 @@ class PascalVocReader:
                     instance_id = int(object_iter.find('instance_id').text)
                 self.addPolygonShape(label, points,instance_id)
         else:
-            print 'unsupportable shape type'
+            print ('unsupportable shape type')
 
 
 # tempParseReader = PascalVocReader('test.xml')

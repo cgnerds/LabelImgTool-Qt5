@@ -1,9 +1,9 @@
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 import socket
 import re
 
 
-class SetRemoteDialog(QtGui.QDialog):
+class SetRemoteDialog(QtWidgets.QDialog):
     remote_mode = True
     remote_url = ""
     dowload_thead_num = 4

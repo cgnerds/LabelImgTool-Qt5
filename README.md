@@ -34,15 +34,15 @@ Brush SEG mode(in development: brush branch)
 
 ## Build source and use it
 
-Requires at least [Python 2.6](http://www.python.org/getit/) and has been tested with [PyQt4.8](http://www.riverbankcomputing.co.uk/software/pyqt/intro).
+Requires at least [Python 2.6](http://www.python.org/getit/) and has been tested with [PyQt5.8](http://www.riverbankcomputing.co.uk/software/pyqt/intro).
 
-In order to build the resource and assets, you need to install pyqt4-dev-tools:
+In order to build the resource and assets, you need to install PyQt5-dev-tools:
 
 * Ubuntu
 
-`sudo apt-get install pyqt4-dev-tools`
+`sudo apt-get install PyQt5-dev-tools`
 * Mac
-   install pyqt4 with [instructions](https://robonobodojo.wordpress.com/2017/02/08/installing-pyqt4-on-mac-osx/)
+   install PyQt5 with [instructions](https://robonobodojo.wordpress.com/2017/02/08/installing-PyQt5-on-mac-osx/)
 
 `sudo apt-get install python-opencv`
 
@@ -54,7 +54,7 @@ In order to build the resource and assets, you need to install pyqt4-dev-tools:
 
 * Windows
 
-Need to download and setup [Python 2.6](https://www.python.org/downloads/windows/) or later and [PyQt4](https://www.riverbankcomputing.com/software/pyqt/download),lxml,qdarkstyle.
+Need to download and setup [Python 2.6](https://www.python.org/downloads/windows/) or later and [PyQt5](https://www.riverbankcomputing.com/software/pyqt/download),lxml,qdarkstyle.
 Open cmd and go to $labelImg, 
 
 `$ pyrcc4 -o resources.py resources.qrc`
