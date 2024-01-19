@@ -112,19 +112,3 @@ the image will be cached in a folder created in the software file named database
 open File   -->ChangedDefaultSavedAnnotationDir(ctrl+r) to set the folder to save the results
 
 2. if your settings are right,you will find the **Get Images** button becomes enabled and click it ,then you can annotate the images as before
-
-### Change list
-* 18-08-19 py3 pyqt5 supported in the branch py3
-
-* 17-08-14  add class label function
-
-### Todo list
-* support pyqt5 and python 3
-* add more functions while adding parsing labels
-* refine the setting functions
-
-### How to contribute
-Send a pull request
-
-### License
-[License](LICENSE.md)
