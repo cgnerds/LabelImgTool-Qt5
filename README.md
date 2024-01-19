@@ -34,8 +34,8 @@ Requires at least [Python 3.10](http://www.python.org/getit/) and has been teste
 conda create -n labelimgtool python=3.10 -y
 conda activate labelimgtool
 pip install -r requirements.txt
-python labelImg.py
-# (NOT NEED)
+python labelImgTool.py
+# (If UI is not right, run this. Or, ignore it.)
 pyrcc5 -o resources.py resources.qrc
 ```
 ## Default file framework

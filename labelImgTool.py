@@ -544,10 +544,12 @@ class MainWindow(QMainWindow, WindowMixin):
             ),
             onDETActive=(
                 createRect,
+                createPolygon,
                 createMode,
                 editMode
             ),
             onSEGActive=(
+                createRect,
                 createPolygon,
                 createMode,
                 editMode
@@ -1798,7 +1800,7 @@ class MainWindow(QMainWindow, WindowMixin):
                 self.has_defined_color_map = True
         else:
             self.label_color_map = [color + [50] for color in COLORMAP.values()]
-            print(self.label_color_map)
+            # print(self.label_color_map)
 
     def loadPredefinedCLSClasses(self):
         self.labelHist = []
