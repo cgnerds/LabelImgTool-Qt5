@@ -1068,7 +1068,8 @@ class MainWindow(QMainWindow, WindowMixin):
             for label, points, line_color, fill_color, shape_type, instance_id in shapes:
                 shape = Shape(label=label, shape_type=shape_type, instance_id=instance_id)
                 assert isinstance(shape_type, int)
-                if self.task_mode == 0 and shape_type == 0 or self.task_mode == 1 and shape_type == 1:
+                # if self.task_mode == 0 and shape_type == 0 or self.task_mode == 1 and shape_type == 1:
+                if self.task_mode in [0,1] and shape_type in [0,1]:
                     for x, y in points:
                         shape.addPoint(QPointF(x, y))
                     shape.close()
