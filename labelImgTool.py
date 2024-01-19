@@ -14,16 +14,9 @@ from functools import partial
 import qdarkstyle
 import requests
 
-try:
-    from PyQt5.QtGui import *
-    from PyQt5.QtCore import *
-    from PyQt5.QtWidgets import *
-except ImportError:
-    if sys.version_info.major >= 3:
-        import sip
-        sip.setapi('QVariant', 2)
-    from PyQt4.QtCore import *
-    from PyQt4.QtGui import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 from libs.constants import *
 from libs.ustr import ustr
 
@@ -50,10 +43,6 @@ __appname__ = 'labelImgTool'
 def have_qstring():
     '''p3/qt5 get rid of QString wrapper as py3 has native ustr str type'''
     return not (sys.version_info.major >= 3 or QT_VERSION_STR.startswith('5.'))
-
-
-def util_qt_strlistclass():
-    return QStringList if have_qstring() else list
 
 
 class WindowMixin(object):
@@ -1312,12 +1301,13 @@ class MainWindow(QMainWindow, WindowMixin):
         if filename is None:
             if self.app_settings.get(SETTING_FILENAME):
                 filename = self.app_settings[SETTING_FILENAME]
-        filename = ustr(filename)
+        # filename = ustr(filename)
         if filename and self.fileListWidget.count() > 0:
             index = self.mImgList.index(filename)
             fileWidgetItem = self.fileListWidget.item(index)
             fileWidgetItem.setSelected(True)
             #self.fileListWidget.setSelected(fileWidgetItem, True)
+        print(filename)
         if QFile.exists(filename):
             if LabelFile.isLabelFile(filename):
                 try:
@@ -1504,7 +1494,7 @@ class MainWindow(QMainWindow, WindowMixin):
                        for fmt in QImageReader.supportedImageFormats()]
             filters = "Open Annotation XML file (%s)" % \
                       ' '.join(formats + ['*.xml'])
-            filename = ustr(
+            filename, _ = ustr(
                 QFileDialog.getOpenFileName(
                     self, '%s - Choose a xml file' %
                           __appname__, path, filters))
@@ -1623,18 +1613,13 @@ class MainWindow(QMainWindow, WindowMixin):
             return
         path = os.path.dirname(ustr(self.filename)) \
             if self.filename else '.'
-        formats = ['*.%s' % str(fmt).lower()
-                   for fmt in QImageReader.supportedImageFormats()]
-        if '*.jpg' not in formats:
-            formats.append('*.jpg')
-        if '*.jpeg' not in formats:
-            formats.append('*.jpeg')
+            
+        formats = ['*.jpg', '*.jpeg', '*.png', '*.bmp', '*.tif', '*.tiff']
         filters = "Image & Label files (%s)" % \
                   ' '.join(formats + ['*%s' % LabelFile.suffix])
-        filename = ustr(
-            QFileDialog.getOpenFileName(
-                self, '%s - Choose Image or Label file' %
-                      __appname__, path, filters))
+        print(filters)
+        filename, _ = QFileDialog.getOpenFileName(self, '%s - Choose Image or Label file' %
+                      __appname__, path, filters)
         if filename:
             self.loadFile(filename)
 
