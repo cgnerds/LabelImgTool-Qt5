@@ -1206,8 +1206,14 @@ class MainWindow(QMainWindow, WindowMixin):
                 label_fre_dic=self.label_fre_dic)
 
         text = self.labelDialog.popUp()
+        print(type(text))
+        print(text)
+        
         text = str(text)
-        if text is not None and text is not 'None':
+        
+        if text is not None and text != 'None':
+            print(text)
+            print(type(text))
 
             if str(text) in self.label_fre_dic:
                 self.label_fre_dic[str(text)] += 1
